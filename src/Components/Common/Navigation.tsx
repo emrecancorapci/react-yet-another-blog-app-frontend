@@ -3,35 +3,36 @@ import { Link } from 'react-router-dom';
 import AuthContext from '../../Context/AuthContext';
 
 /**
- * @description `Navigation` bar for the top of the page.
+ * Navigation bar
  * @return {JSX.Element} The navigation bar
  */
 
-function Navigation (): JSX.Element {
+function Navigation(): JSX.Element {
   const { auth, setAuth } = useContext(AuthContext);
 
   const onClickLogout = (): void => {
-    sessionStorage.removeItem('user')
-    setAuth(false)
-  }
+    sessionStorage.removeItem('user');
+    setAuth(false);
+  };
 
   const userButton = (): JSX.Element => {
     if (auth) {
       return (
-        (<button
+        <button
           className="btn c-bg-lighter border-0 fw-bold"
-          onClick={() => { onClickLogout(); }}>
+          onClick={() => {
+            onClickLogout();
+          }}
+        >
           Logout
-        </button>)
-      )
+        </button>
+      );
     } else {
       return (
-        (<Link to={'/login'}>
-          <button className="btn c-bg-lighter border-0 fw-bold">
-            Login
-          </button>
-        </Link>)
-      )
+        <Link to={'/login'}>
+          <button className="btn c-bg-lighter border-0 fw-bold">Login</button>
+        </Link>
+      );
     }
   };
 
@@ -48,7 +49,8 @@ function Navigation (): JSX.Element {
           data-bs-target="#headerNavbar"
           aria-controls="headerNavbar"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon" />
         </button>
 
@@ -60,13 +62,11 @@ function Navigation (): JSX.Element {
               </Link>
             </div>
           </div>
-          <div className="me-5">
-            {userButton()}
-          </div>
+          <div className="me-5">{userButton()}</div>
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
-export default Navigation
+export default Navigation;

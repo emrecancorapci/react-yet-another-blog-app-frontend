@@ -13,29 +13,26 @@ import { CommentResponse } from '../../Interfaces/CommentResponse';
 // TODO Implement comment pin
 
 /**
- * @description Comment card with date tooltip
- *
- * @param {Object} comment - Comment object
+ * Comment card with date tooltip
+ * @param {CommentResponse} comment - Comment object
  * @return {JSX.Element} Comment card
  */
 
-function CommentCard ({ comment }: { comment: CommentResponse }): JSX.Element {
+function CommentCard({ comment }: { comment: CommentResponse }): JSX.Element {
   return (
-    <div className='card'>
-      <div className='card-header c-bg-light'>
-        <div className='row justify-content-between'>
-          <div className='col-auto fw-bold'>
+    <div className="card">
+      <div className="card-header c-bg-light">
+        <div className="row justify-content-between">
+          <div className="col-auto fw-bold">
             <UserHover id={comment.authorId} />
           </div>
-          <div className='col-auto'>
-            <DateTooltip date={comment.created}/>
+          <div className="col-auto">
+            <DateTooltip date={comment.created} />
           </div>
         </div>
       </div>
-      <div className='card-body'>
-        <pre className='content-pre'>
-          {comment.content}
-        </pre>
+      <div className="card-body">
+        <pre className="content-pre">{comment.content}</pre>
       </div>
     </div>
   );

@@ -14,20 +14,21 @@ const postInitial: PostResponse = {
   postSummary: '',
   authorId: 0,
   isCommentsVisible: false,
-  addCommentsEnabled: false
+  addCommentsEnabled: false,
 };
 
 /**
- * @description - Displays a single post and its comments
- * @return {JSX.Element} - Single post and its comments
+ * Single post page
+ * @description Displays a single post and its comments
+ * @return {JSX.Element}
  */
 
-function SinglePost (): JSX.Element {
+function SinglePost(): JSX.Element {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [post, setPost] = useState<PostResponse>(postInitial);
 
-  if (id === undefined) return (<h1>No ID</h1>)
+  if (id === undefined) return <h1>No ID</h1>;
 
   useEffect(() => {
     const api = getApi(`Posts/${id}`);
@@ -46,34 +47,36 @@ function SinglePost (): JSX.Element {
       .finally(() => { setIsLoading(false); });
   }, [id]);
 
-  return (<>
-    {isLoading && <div className='spinner-border' role='status' />}
-    {<div className='container'>
+  return (
+    <>
+      {isLoading && <div className="spinner-border" role="status" />}
+      {
+        <div className="container">
       <article>
-        {/* Title Section */}
-        <title className='row'>
-          <h1 className='fw-bold'>{post.title}</h1>
+            <title className="row">
+              <h1 className="fw-bold">{post.title}</h1>
         </title>
-        <div className='row'>
-          <div className='col-auto'>
+
+            <div className="row">
+              <div className="col-auto">
             <h5 className="text-muted fw-bold">
               <UserHover id={post.authorId} />
             </h5>
           </div>
         </div>
-        {/* Content Section */}
-        <div className='row p-2 pb-1 mt-2 mb-3 rounded
-          border border-opacity-75'>
-          <pre className='content-pre'>
-            {post.content}
-          </pre>
+
+            <div
+              className="row p-2 pb-1 mt-2 mb-3 rounded
+          border border-opacity-75"
+            >
+              <pre className="content-pre">{post.content}</pre>
         </div>
       </article>
-      <CommentsSection
-        postId={Number(id)}
-        addPermission={post.addCommentsEnabled}/>
-    </div>}
-  </>);
+          <CommentsSection postId={Number(id)} addPermission={post.addCommentsEnabled} />
+        </div>
+      }
+    </>
+  );
 }
 
 export default SinglePost;

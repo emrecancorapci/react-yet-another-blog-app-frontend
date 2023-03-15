@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function SidePanel (): JSX.Element {
+function SidePanel(): JSX.Element {
   return (
     <ul className="list-group">
       <Link to={'/Post/Add'}>

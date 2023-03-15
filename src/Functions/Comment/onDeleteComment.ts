@@ -10,13 +10,18 @@ import getApi from '../Common/getApi';
  * @returns {void} Nothing
  */
 
-function onDeleteComment (id: number): void {
+function onDeleteComment(id: number): void {
   const api = getApi(`Comments/${id}`);
   const config = getAuthConfig();
 
-  axios.delete(api, config)
-    .then((request) => { console.log(request); })
-    .catch((event) => { console.log(event); });
+  axios
+    .delete(api, config)
+    .then((request) => {
+      console.log(request);
+    })
+    .catch((event) => {
+      console.log(event);
+    });
 }
 
 export default onDeleteComment;

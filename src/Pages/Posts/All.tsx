@@ -12,38 +12,40 @@ import { PostResponse } from '../../Interfaces/PostResponse';
  * @returns {JSX.Element} All posts in the database
  */
 
-function ViewPosts ({ userId }: { userId?: number }): JSX.Element {
+function ViewPosts({ userId }: { userId?: number }): JSX.Element {
   // TODO Add pagination
   const [posts, setPosts] = useState([] as PostResponse[]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const api = userId !== undefined
-      ? getApi(`Posts?authorId=${userId}`)
-      : getApi('Posts');
+    const api = userId !== undefined ? getApi(`Posts?authorId=${userId}`) : getApi('Posts');
 
-    const fetchPosts: () => Promise<AxiosResponse> =
-      async () => await axios(api);
+    const fetchPosts: () => Promise<AxiosResponse> = async () => await axios(api);
 
     fetchPosts()
       .then((response) => {
         if (response.status !== 200) {
-          throw new Error('Error' +
-          ` ${response.status}: ${response.statusText}`);
+          throw new Error('Error' + ` ${response.status}: ${response.statusText}`);
         }
-        setPosts(response.data)
-        console.log(response.data)
+        setPosts(response.data);
+        console.log(response.data);
       })
-      .catch((event) => { console.log(event); })
-      .finally(() => { setIsLoading(false); });
+      .catch((event) => {
+        console.log(event);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
-  return (<>
-    {isLoading && (<div className='spinner-border' role='status'/>)}
-    {posts.map((post, index) =>
-      <PostCard post={post} key={index}/>
-    )}
-  </>);
+  return (
+    <>
+      {isLoading && <div className="spinner-border" role="status" />}
+      {posts.map((post, index) => (
+        <PostCard post={post} key={index} />
+      ))}
+    </>
+  );
 }
 
 export default ViewPosts;

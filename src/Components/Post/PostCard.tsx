@@ -1,15 +1,14 @@
-import UserHover from '../User/UserHover'
-import { Link } from 'react-router-dom'
-import { PostResponse } from '../../Interfaces/PostResponse'
+import UserHover from '../User/UserHover';
+import { Link } from 'react-router-dom';
+import { PostResponse } from '../../Interfaces/PostResponse';
 
 /**
- * @description Displays a post card with a title, author, and summary
- *
- * @param {object} post - Post object
+ * Post card
+ * @param {PostResponse} post - Post object
  * @return {JSX.Element} Post card
  */
 
-function PostCard ({ post }: { post: PostResponse }): JSX.Element {
+function PostCard({ post }: { post: PostResponse }): JSX.Element {
   return (
     <div className="card row mt-3 mx-1 p-1 shadow-sm c-bg-lighter border-0">
       <div className="card-body">
@@ -30,7 +29,7 @@ function PostCard ({ post }: { post: PostResponse }): JSX.Element {
         */}
       </div>
     </div>
-  )
+  );
 }
 
-export default PostCard
+export default PostCard;

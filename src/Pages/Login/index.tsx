@@ -6,8 +6,8 @@ import getApi from '../../Functions/Common/getApi';
 import AuthContext from '../../Context/AuthContext';
 
 interface Fields {
-  username: string
-  password: string
+  username: string;
+  password: string;
 }
 
 /**
@@ -17,16 +17,15 @@ interface Fields {
  * @return {JSX.Element} - Form element
  */
 
-function Login (): JSX.Element {
+function Login(): JSX.Element {
   const { setAuth } = useContext(AuthContext);
   const api = getApi('Users/Login');
-  const fetchData: (value: Fields) => Promise<AxiosResponse> =
-    async (values: Fields) => await axios.post(api, values);
+  const fetchData: (value: Fields) => Promise<AxiosResponse> = async (values: Fields) => await axios.post(api, values);
 
   const formik = useFormik({
     initialValues: {
       username: '',
-      password: ''
+      password: '',
     },
     onSubmit: (values: Fields) => {
       fetchData(values)
@@ -36,32 +35,34 @@ function Login (): JSX.Element {
             setAuth(true);
           }
         })
-        .catch((event) => { console.log(event); });
-    }
+        .catch((event) => {
+          console.log(event);
+        });
+    },
   });
 
   return (
-      <form onSubmit={formik.handleSubmit}>
-        <div>
-          <input
-            id='username'
-            name="username"
-            type="text"
-            placeholder="Username"
-            value={formik.values.username}
-            onChange={formik.handleChange}
-          />
-          <input
-            id='password'
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
-          <button type="submit">Login</button>
-        </div>
-      </form>
+    <form onSubmit={formik.handleSubmit}>
+      <div>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          value={formik.values.username}
+          onChange={formik.handleChange}
+        />
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+        />
+        <button type="submit">Login</button>
+      </div>
+    </form>
   );
 }
 

@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig } from 'axios';
 
 /**
  * @description Get the user token from the session storage and return the config object for the axios request
@@ -13,11 +13,11 @@ const getAuthConfig: () => AxiosRequestConfig = () => {
   const config: AxiosRequestConfig = {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   };
 
   return config;
-}
+};
 
 export default getAuthConfig;
